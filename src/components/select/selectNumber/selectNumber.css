@@ -1,0 +1,13 @@
+.input-custom:focus-visible{
+    border:none;
+    outline: none;
+}
+
+.input-custom::-webkit-inner-spin-button, .input-custom::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+
+.input-custom {
+    -moz-appearance:textfield !important;
+}
