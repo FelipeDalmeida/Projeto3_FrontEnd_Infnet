@@ -81,7 +81,7 @@ const Cart=()=>{
         {Produtos.map((produto,index)=>(
           <Grid container spacing={2} sx={{position:"relative",border:"1px solid #ddd",margin:0,borderRadius:"3px",width:"100%"}}>
             <Grid item xs={6} md={3} sx={{padding:0}}><Img img={produto.img} style={{width:"100%"}}/></Grid>
-            <Grid item xs={6} md={3} sx={{alignSelf: "center"}}><Text text={produto.nome}/></Grid>
+            <Grid item xs={6} md={3} sx={{alignSelf: "center",textAlign: "center"}}><Text text={produto.nome}/></Grid>
             <Grid item xs={6} md={3} sx={{display: "flex", justifyContent: "center",alignItems: "center"}}>              
               <Box><SelectNumber id={produto.id} value={produto.unit} subtraction={()=>setSubtrai(produto.unit,index,produto)} plus={()=>setAdiciona(produto.unit,index,produto)} onChange={(e)=>changeValue(e,index)}/></Box>   
             </Grid>

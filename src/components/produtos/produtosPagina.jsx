@@ -3,12 +3,15 @@ import Notfound from "../../pages/notFound/notfound"
 import Img from "../img/avatar"
 import SelectOptions from "../select/select"
 import Text from "../text/text"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import "./discount.css"
 import RadioGroup from "../radio/radioGroup"
 import Btn from "../button/button"
 import SelectNumber from "../select/selectNumber/selectNumber"
-import { addLocalStorage } from "../../services/getData"
+import { addLocalStorage, deletItemLocalStorage, loadLocalStrorage } from "../../services/getData"
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import corPrincipal from '../../assets/js/script'
 
 const ProdutoPage=({info})=>{
 
@@ -16,6 +19,7 @@ const ProdutoPage=({info})=>{
     const [nota,setNota]=useState(4.5)
     const [size,setSize]=useState("")
     const [unidades,setUnidades]=useState(1)
+    const [favorite,setFavorite]=useState(false)
 
     let preco=parseFloat(info.preco).toFixed(2)
     let desconto=parseFloat(info.desconto).toFixed(2)
@@ -43,6 +47,31 @@ const ProdutoPage=({info})=>{
         addLocalStorage("cart",info)
     }
     
+    const saveToFavorite=()=>{
+        addLocalStorage("favorite",info)
+        setFavorite(true)
+    }
+
+    const deleteFavorite=()=>{
+        deletItemLocalStorage("favorite",info.id)
+        setFavorite(false)
+    }
+
+    const verificaFavorito=()=>{   //verificar e marcar os favoritos
+        let favoritos=loadLocalStrorage("favorite")
+        if(favoritos){
+        favoritos.map(favorito=>{
+            if(favorito.id===info.id){
+                setFavorite(true)
+            }
+        })
+    }
+    }
+
+    useEffect(()=>{
+        verificaFavorito()  //verificar favorito
+    },[])
+
     const cores=info.color;
     const tamanhos=info.size;
 
@@ -57,6 +86,7 @@ const ProdutoPage=({info})=>{
         <Grid item xs={0} md={1} xl={2}></Grid> {/* offset */}
         <Grid item xs={12} md={5} xl={4} sx={{position:"relative"}}>
            <Img img={info.img} style={imgStyle}/>
+           {favorite?<Btn title={<FavoriteIcon sx={{color:corPrincipal}}/>} variant={"text"} size={"large"} onClick={deleteFavorite} style={{position:"absolute",margin:0,right:"0px",top:"0px"}}/>:<Btn title={<FavoriteBorderIcon sx={{color:corPrincipal}}/>} onClick={saveToFavorite} variant={"text"} size={"large"}  style={{position:"absolute",margin:0,right:"0px",top:"0px"}}/>}
         </Grid>
         <Grid item xs={12} md={5} xl={4}>
             <Stack
@@ -139,7 +169,7 @@ const ProdutoPage=({info})=>{
                 }}
             >
                 <SelectNumber value={unidades} onChange={(e)=>setUnidades(e.target.value)} set={setUnidades}/>
-                <Btn title={"Adicionar ao Carrinho"} size={"large"} style={{ marginTop: "0px", marginLeft:"5px" }} onClick={saveToCart}/>
+                <Btn title={"Adicionar ao Carrinho"} size={"large"} style={{ marginTop: "0px", marginLeft:"5px", backgroundColor:corPrincipal }} onClick={saveToCart}/>
             </Stack>
         </Grid>
    

@@ -1,13 +1,15 @@
 import { Box } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Btn from "../button/button";
 import Img from "../img/avatar";
 import Text from "../text/text";
 import "./discount.css"
 import corPrincipal from '../../assets/js/script'
-import { display } from "@mui/system";
 import {useNavigate } from "react-router";
-import { addLocalStorage } from "../../services/getData"
+import { addLocalStorage, deletItemLocalStorage, loadLocalStrorage } from "../../services/getData"
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
 
 const Produto=({produto})=>{
     
@@ -23,6 +25,7 @@ const Produto=({produto})=>{
     let valorDesconto=(preco*(1-desconto)).toFixed(2)
 
     const [mouseover,setMouseover]=useState(false)
+    const [favorite,setFavorite]=useState(false)
 
     const displayBtn=()=>{
         setMouseover(true);
@@ -36,10 +39,35 @@ const Produto=({produto})=>{
         addLocalStorage("cart",produto)
     }
 
+    const saveToFavorite=()=>{
+        addLocalStorage("favorite",produto)
+        setFavorite(true)
+    }
+
+    const deleteFavorite=()=>{
+        deletItemLocalStorage("favorite",produto.id)
+        setFavorite(false)
+    }
+
+    const verificaFavorito=()=>{   //verificar e marcar os favoritos
+        let favoritos=loadLocalStrorage("favorite")
+        if(favoritos){
+        favoritos.map(favorito=>{
+            if(favorito.id===produto.id){
+                setFavorite(true)
+            }
+        })
+    }
+    }
+
     const btnClick=()=>{
         saveToCart();
         goToCart();
     }
+
+    useEffect(()=>{
+        verificaFavorito()
+    },[])
 
     return <Box 
             sx={{position:"relative",
@@ -61,13 +89,13 @@ const Produto=({produto})=>{
                 <div >
                     <Text text={`De: R$ ${preco}`} type={"p"} style={{marginLeft:"20px",display:"block",fontSize:"18px",color:"#999",textDecoration:"line-through"}}/>
                     <Text text={`Por: R$ ${valorDesconto}`} type={"p"} style={{marginLeft:"20px",display:"block",color:"#FF6900"}}/>
-                    <span className="flag-discount" style={{position:"absolute",top: "40px", right: "40px"}}>{`${desconto*100}% OFF`}</span>
+                    <span className="flag-discount" style={{position:"absolute",top: "50px", right: "40px"}}>{`${desconto*100}% OFF`}</span>
                 </div>:
                 
                 <div><Text text={`R$ ${preco}`} type={"p"} style={{marginLeft:"20px",display:"block",fontSize:"18px",color:"#FF6900"}}/></div>}
             </div>
             <div style={{textAlign: "center",display:mouseover?"block":"none", transition: "all 2s linear"}}><Btn title={"Comprar"} fullWidth={false} onClick={btnClick} style={{width:"80%", backgroundColor:corPrincipal, marginBottom: "15px"}} size={"large"}/></div>
-            
+            {mouseover?favorite?<Btn title={<FavoriteIcon sx={{color:corPrincipal}}/>} variant={"text"} size={"large"} onClick={deleteFavorite} style={{position:"absolute",margin:0,right:"0px",top:"0px"}}/>:<Btn title={<FavoriteBorderIcon sx={{color:corPrincipal}}/>} onClick={saveToFavorite} variant={"text"} size={"large"}  style={{position:"absolute",margin:0,right:"0px",top:"0px"}}/>:""}
 
             
         </Box>
