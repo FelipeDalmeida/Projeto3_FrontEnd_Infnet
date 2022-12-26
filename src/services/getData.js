@@ -14,7 +14,7 @@ const addLocalStorage=(local,info)=>{
 
     if(localSave){
         localSave=JSON.parse(localSave)
-        console.log(localSave)
+
         let verifica=localSave.some(item=>item.id===info.id)
         if(!verifica){
             window.localStorage.setItem(local,JSON.stringify([...localSave,info]))
@@ -37,7 +37,7 @@ const atualizaUnidadesLocalStorage=(local,info)=>{  //utilizado apenas na pagina
 
 const loadLocalStrorage=(local)=>{
     let info=JSON.parse(window.localStorage.getItem(local))
-    console.log(info)
+
     return info
 }
 

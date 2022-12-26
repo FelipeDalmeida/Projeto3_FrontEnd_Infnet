@@ -42,7 +42,7 @@ const Login=()=>{
 
     const validaChekbox=()=>{
         setIsChecked(!isChecked)
-        console.log(isChecked)
+
     } 
 
     return <div style={loginStyle}>

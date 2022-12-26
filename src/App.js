@@ -12,6 +12,7 @@ const Favoritos=lazy(()=>import('./pages/favoritos/favoritos'))
 const Produto=lazy(()=>import('./pages/produto/pageproduto'))
 const Cart=lazy(()=>import('./pages/cart/cart'))
 const Checkout=lazy(()=>import('./pages/checkout/checkout'))
+const CompraRealizada=lazy(()=>import('./pages/comprarealizada/compraRealizada'))
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/favoritos" element={<Favoritos/>}/>
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
+        <Route path="/compra_realizada" element={<CompraRealizada/>}/>
         <Route path="*" element={<Notfound/>}/>
         
       </Routes>

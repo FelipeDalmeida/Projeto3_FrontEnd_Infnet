@@ -16,13 +16,14 @@ import SelectOptions from "../../components/select/select";
 const Checkout=()=>{
 
     const [Produtos,setProdutos]=useState([])
-    const [endereco,setEndereco]=useState({value:"",error:null})
-    const [cep,setCep]=useState({value:"",error:null})
-    const [celular,setCelular]=useState({value:"",error:null})
-    const [nome,setNome]=useState({value:"",error:null})
-    const [CPF,setCPF]=useState({value:"",error:null})
+    const [endereco,setEndereco]=useState({value:"",error:false})
+    const [cep,setCep]=useState({value:"",error:false})
+    const [celular,setCelular]=useState({value:"",error:false})
+    const [nome,setNome]=useState({value:"",error:false})
+    const [CPF,setCPF]=useState({value:"",error:false})
     const [cartao,setCartao]=useState({nome:"",errorNome:null,cod:"",errorCod:null,data:"",errorData:null,numero:"",errorNumero:null})
     const [pagamento,setPagamento]=useState("PIX")
+    const [valida,setValida]=useState(false)
 
     const opcoesPagamento=["PIX","Cartão","Boleto"]
     const navigate=useNavigate();
@@ -39,7 +40,7 @@ const Checkout=()=>{
     const eventHandlerPagamento=(e)=>{setPagamento(e.target.value)}
 
 
-    const validaCompra=()=>{
+    const validaCampos=()=>{
         if(!endereco.value){
             setEndereco({...endereco, error:"Digite o endereço"})
         } else{
@@ -84,8 +85,12 @@ const Checkout=()=>{
             }
              
         }
-        
+        if((endereco.value) && (cep.value.length==8) && (celular.value.length==9) && (nome.value) && (CPF.value.length==11)){ //em um cenario real, colocar erro do cartao
+            goToPage("compra_realizada")
+        } else {return false}
     }
+
+
 
     const calculaValor=(price,discount,unit)=>{
       price=parseFloat(price).toFixed(2)
@@ -136,8 +141,8 @@ const Checkout=()=>{
                 {pagamento==="PIX"?<Grid item xs={12} md={6} sx={{backgroundColor: "white" ,display:"flex",flexDirection:"column",alignItems:"center",margin: "0px"}}><Box sx={{ backgroundColor:"rgb(229, 255, 241)",width:"100%",padding:"5px",margin:"5px",textAlign: "center"}}><Text text={`Total à vista no PIX:`} style={{color:"rgb(31, 144, 80)",fontSize:"12px"}}/><Text text={`R$ ${(valorComDesconto()*0.9).toFixed(2)}`} style={{color:"rgb(31, 144, 80)",fontSize:"24px"}}/></Box></Grid>:""}
             </Grid>
           <Box>
-            <Btn title={"Pagar"} onClick={validaCompra} style={{backgroundColor:corPrincipal}} fullWidth={true}/>
-            <Btn title={"Voltar para o carrinho"} onClick={()=>goToPage("cart")} style={{backgroundColor:corPrincipal}} fullWidth={true}/>
+            <Btn title={"Pagar"} onClick={()=> validaCampos()} style={{backgroundColor:corPrincipal}} fullWidth={true}/>
+            <Btn title={"Voltar para o carrinho"} onClick={()=>goToPage("catalog")} style={{backgroundColor:corPrincipal}} fullWidth={true}/>
           </Box>
         </Grid>
       </Grid>

@@ -25,9 +25,9 @@ const Produto=()=>{
 
     const loadData=async()=>{
 
-        // const response = await get(`http://demo7797720.mockable.io/produto/${id}`).catch((error)=>{if(error.response){return null}}); //Para utilizar com mock de cada página
+        // const response = await get(`https://demo7797720.mockable.io/produto/${id}`).catch((error)=>{if(error.response){return null}}); //Para utilizar com mock de cada página
 
-        const response = await get(`http://demo7797720.mockable.io/projetofrontend3`).catch((error)=>{if(error.response){return null}}); //Pela doc do axios: catch irá verificar se teve erro, caso tenha, resonse será null
+        const response = await get(`https://demo7797720.mockable.io/projetofrontend3`).catch((error)=>{if(error.response){return null}}); //Pela doc do axios: catch irá verificar se teve erro, caso tenha, resonse será null
         const produtos = response.data;
         let info=selecionaProduto(produtos)
         
