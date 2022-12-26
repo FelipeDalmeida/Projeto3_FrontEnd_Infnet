@@ -1,5 +1,5 @@
 import {Link } from 'react-router-dom';
-import { useState} from 'react';
+import { useEffect, useState} from 'react';
 import Nav from '../../components/nav/nav';
 import './header.css'
 import '../../assets/css/grid.css';
@@ -7,11 +7,11 @@ import Btn from '../../components/button/button'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MenuIcon from '@mui/icons-material/Menu';
-import {FaBars } from "react-icons/fa";
 
 
 const Header=()=>{
     const [click,setClick]=useState(false)
+
 
     const manipulaMenuMobile=()=>{
         setClick(!click);
@@ -36,7 +36,7 @@ const Header=()=>{
         zIndex: "998",
     }
 
-    const lis=[<Link to="/">Home</Link>,<Link to="/Login">Login</Link>,<Link to="/Register">Registro</Link>,<Link to="/Catalog">Catalogo</Link>]
+    const lis=[<Link to="/Login">Login</Link>,<Link to="/Register">Registro</Link>,<Link to="/Catalog">Catalogo</Link>]
     // const lis=[<Link to="/">Home</Link>]
 
     const lisPerfil=[<Link to="/favoritos"><FavoriteIcon/></Link>,
