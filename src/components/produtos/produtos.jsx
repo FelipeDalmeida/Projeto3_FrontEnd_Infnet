@@ -13,7 +13,7 @@ const Produtos=({spacing,produtos,xs,sm,md,lg,xl,xxl})=>{
     let contador=0;
     const [type,setType]=useState(null)
     
-    const categorias=[null,"Smartwatch","Smartphone","Lazer"]
+    const categorias=[null,"Smartwatch","Smartphone","Patinete Elétrico"]
     return <>
     <Grid container sx={{backgroundColor:"#F2B705",padding:"10px"}}>
 

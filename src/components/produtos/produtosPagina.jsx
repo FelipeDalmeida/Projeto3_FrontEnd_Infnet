@@ -107,7 +107,7 @@ const ProdutoPage=({info})=>{
     
                 
                     <Stack spacing={1} sx={{ alignSelf: "center"}}>
-                        {/* TODO: Salvar e carregar no localstorage a nota*/}
+                     
                         <Rating name="half-rating" value={nota} precision={0.5} onChange={eventHandlerNota}/>
                     </Stack>
             </Stack>

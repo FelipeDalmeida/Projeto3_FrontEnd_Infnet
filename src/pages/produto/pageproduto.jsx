@@ -10,15 +10,31 @@ const Produto=()=>{
     const params=useParams()
     const id=params.id;
 
-    const [produtoInfo,setrProdutoInfo]=useState(<PlaceholderProdutos/>); //TODO Placeholder
+    const [produtoInfo,setrProdutoInfo]=useState(<PlaceholderProdutos/>);
+
+    const selecionaProduto=(produtos)=>{
+        let info=null
+        produtos.map(produto=>{
+            if(produto.id===id){
+                info= produto
+            } 
+        })
+        return info
+    }
+
 
     const loadData=async()=>{
-        console.log("/////////////////////")
-        const response = await get(`http://demo7797720.mockable.io/produto/${id}`).catch((error)=>{if(error.response){return null}}); //Pela doc do axios: catch irá verificar se teve erro, caso tenha, resonse será null
-        // setrProdutoInfo(response.data)
-        console.log(response)
-        setrProdutoInfo(response?<ProdutoPage info={response.data}/>:<Notfound/>)
+
+        // const response = await get(`http://demo7797720.mockable.io/produto/${id}`).catch((error)=>{if(error.response){return null}}); //Para utilizar com mock de cada página
+
+        const response = await get(`http://demo7797720.mockable.io/projetofrontend3`).catch((error)=>{if(error.response){return null}}); //Pela doc do axios: catch irá verificar se teve erro, caso tenha, resonse será null
+        const produtos = response.data;
+        let info=selecionaProduto(produtos)
+        
+        setrProdutoInfo(response?<ProdutoPage info={info}/>:<Notfound/>)
     }
+
+
 
     useEffect(()=>{loadData()},[])
 

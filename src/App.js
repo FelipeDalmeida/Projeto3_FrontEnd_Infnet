@@ -5,7 +5,6 @@ import Header from "./pages/header/header"
 import Load from './components/load/load';
 
 const Login=lazy(()=>import('./pages/login/login'))
-const Home=lazy(()=>import('./pages/home/home'))
 const Catalog=lazy(()=>import('./pages/catalog/catalog'))
 const Register=lazy(()=>import('./pages/register/register'))
 const Notfound=lazy(()=>import('./pages/notFound/notfound'))

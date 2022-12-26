@@ -5,7 +5,7 @@ import Produtos from "../../components/produtos/produtos"
 import PlaceholderCatalog from "../../components/placeholders/placeholderCatalog"
 import Notfound from "../notFound/notfound"
 
-//TODO: selecionar por tipo de produto
+
 const Catalog=()=>{
 
     const [produtos,setProdutos]=useState(<PlaceholderCatalog/>);
