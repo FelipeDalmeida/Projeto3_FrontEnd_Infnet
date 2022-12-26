@@ -37,7 +37,6 @@ const atualizaUnidadesLocalStorage=(local,info)=>{  //utilizado apenas na pagina
 
 const loadLocalStrorage=(local)=>{
     let info=JSON.parse(window.localStorage.getItem(local))
-
     return info
 }
 

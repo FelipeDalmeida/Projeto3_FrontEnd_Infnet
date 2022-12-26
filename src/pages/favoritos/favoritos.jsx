@@ -17,7 +17,7 @@ const Favoritos=()=>{
 
     useEffect(() => {
 
-        setFavoritos(loadLocalStrorage("favorite"))   //carregar Favoritos salvos no carrinho
+        setFavoritos(loadLocalStrorage("favorite")?loadLocalStrorage("favorite"):[])   //carregar Favoritos salvos no carrinho
 
       }, []);
 

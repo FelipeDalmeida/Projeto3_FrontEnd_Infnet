@@ -18,7 +18,7 @@ const Cart=()=>{
 
     useEffect(() => {
 
-        setProdutos(loadLocalStrorage("cart"))   //carregar produtos salvos no carrinho
+        setProdutos(loadLocalStrorage("cart")?loadLocalStrorage("cart"):[])   //carregar produtos salvos no carrinho, se não tiver nada no localStorage, returna vetor vazio
 
       }, []);
 
