@@ -55,7 +55,7 @@ function App() {
     <Header favorite={favoriteNumber} cart={cartNumber}/>
       <Routes>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/" element={<Login/>}/>
+        <Route path="/" element={<Catalog somaFav={somaFav} subtraiFav={subtraiFav} somaCart={somaCart}/>}/>
         <Route path="/catalog" element={<Catalog somaFav={somaFav} subtraiFav={subtraiFav} somaCart={somaCart}/>}/>
         <Route path="/produto/:id" element={<Produto somaFav={somaFav} subtraiFav={subtraiFav} somaCart={somaCart}/>}/>
         <Route path="/register" element={<Register/>}/>
