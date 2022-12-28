@@ -6,7 +6,7 @@ import ProdutoPage from "../../components/produtos/produtosPagina"
 import Notfound from "../notFound/notfound"
 import PlaceholderProdutos from "../../components/placeholders/placeholderProduto"
 
-const Produto=()=>{
+const Produto=({somaFav,subtraiFav,somaCart})=>{
     const params=useParams()
     const id=params.id;
 
@@ -31,7 +31,7 @@ const Produto=()=>{
         const produtos = response.data;
         let info=selecionaProduto(produtos)
         
-        setrProdutoInfo(response?<ProdutoPage info={info}/>:<Notfound/>)
+        setrProdutoInfo(response?<ProdutoPage info={info} somaFav={somaFav} subtraiFav={subtraiFav} somaCart={somaCart}/>:<Notfound/>)
     }
 
 

@@ -7,9 +7,10 @@ import Btn from '../../components/button/button'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Badge } from '@mui/material';
 
 
-const Header=()=>{
+const Header=({favorite,cart})=>{
     const [click,setClick]=useState(false)
 
 
@@ -39,8 +40,8 @@ const Header=()=>{
     const lis=[<Link to="/Login">Login</Link>,<Link to="/Register">Registro</Link>,<Link to="/Catalog">Catalogo</Link>]
     // const lis=[<Link to="/">Home</Link>]
 
-    const lisPerfil=[<Link to="/favoritos"><FavoriteIcon/></Link>,
-                    <Link to="/cart"><ShoppingCartIcon/></Link>,]
+    const lisPerfil=[<Link to="/favoritos"><Badge badgeContent={favorite} color="success"><FavoriteIcon/></Badge></Link>,
+                    <Link to="/cart"><Badge badgeContent={cart} color="success"><ShoppingCartIcon/></Badge></Link>,]
     return <header className='header-main'>
             
             <Btn className={'menu-mobile'} onClick={manipulaMenuMobile} title={<MenuIcon style={{transform:"scale(1.2)"}}/>} size={"small"} />

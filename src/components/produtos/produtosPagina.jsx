@@ -13,7 +13,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import corPrincipal from '../../assets/js/script'
 
-const ProdutoPage=({info})=>{
+const ProdutoPage=({info,somaFav,subtraiFav, somaCart})=>{
 
     const [cor,setCor]=useState(info.color?info.color[0]:"")
     const [nota,setNota]=useState(4.5)
@@ -45,16 +45,19 @@ const ProdutoPage=({info})=>{
     const saveToCart=()=>{
         info['unit']=unidades
         addLocalStorage("cart",info)
+        somaCart()
     }
     
     const saveToFavorite=()=>{
         addLocalStorage("favorite",info)
         setFavorite(true)
+        somaFav()
     }
 
     const deleteFavorite=()=>{
         deletItemLocalStorage("favorite",info.id)
         setFavorite(false)
+        subtraiFav()
     }
 
     const verificaFavorito=()=>{   //verificar e marcar os favoritos

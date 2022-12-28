@@ -10,7 +10,7 @@ import NoProducts from "../../components/noproducts/noProducts";
 import corPrincipal from '../../assets/js/script'
 import {useNavigate } from "react-router";
 
-const Cart=()=>{
+const Cart=({subtraiCart})=>{
     const [Produtos,setProdutos]=useState([])
 
     const navigate=useNavigate();
@@ -24,7 +24,10 @@ const Cart=()=>{
 
 
 
-    const deletaItem=(item)=>{setProdutos(deletItemLocalStorage("cart",item))}
+    const deletaItem=(item)=>{
+      setProdutos(deletItemLocalStorage("cart",item))
+      subtraiCart()
+    }
 
     const changeValue=(e,index)=>{
         let newArray=[...Produtos]
@@ -49,7 +52,10 @@ const Cart=()=>{
     }
 
     const removeAll=()=>{
-      Produtos.map(produto=>{deletItemLocalStorage("cart",produto.id)})
+      Produtos.map(produto=>{
+        deletItemLocalStorage("cart",produto.id)
+        subtraiCart()
+      })
       setProdutos("")
       
       

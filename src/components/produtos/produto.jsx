@@ -11,10 +11,12 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 
-const Produto=({produto})=>{
+
+const Produto=({produto,somaFav,subtraiFav,somaCart})=>{
     
 
     let {id,nome,img,descricao,preco,desconto,type}=produto
+    
 
     const navigate=useNavigate();
     const goToPage=()=>{navigate(`/produto/${id}`)}
@@ -37,16 +39,19 @@ const Produto=({produto})=>{
     const saveToCart=()=>{
         produto['unit']=1
         addLocalStorage("cart",produto)
+        somaCart()
     }
 
     const saveToFavorite=()=>{
         addLocalStorage("favorite",produto)
         setFavorite(true)
+        somaFav()
     }
 
     const deleteFavorite=()=>{
         deletItemLocalStorage("favorite",produto.id)
         setFavorite(false)
+        subtraiFav()
     }
 
     const verificaFavorito=()=>{   //verificar e marcar os favoritos

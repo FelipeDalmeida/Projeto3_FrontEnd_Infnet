@@ -9,7 +9,7 @@ import NoFavoritos from "../../components/noproducts/noFavoritos";
 import corPrincipal from '../../assets/js/script'
 import {useNavigate } from "react-router";
 
-const Favoritos=()=>{
+const Favoritos=({subtraiFav})=>{
     const [Favoritos,setFavoritos]=useState([])
 
     const navigate=useNavigate();
@@ -23,10 +23,16 @@ const Favoritos=()=>{
 
 
 
-    const deletaItem=(item)=>{setFavoritos(deletItemLocalStorage("favorite",item))}
+    const deletaItem=(item)=>{
+      setFavoritos(deletItemLocalStorage("favorite",item))
+      subtraiFav()
+  }
 
     const removeAll=()=>{
-      Favoritos.map(produto=>{deletItemLocalStorage("favorite",produto.id)})
+      Favoritos.map(produto=>{
+        deletItemLocalStorage("favorite",produto.id)
+        subtraiFav()
+      })
       setFavoritos("")
     }
 
@@ -56,7 +62,7 @@ const Favoritos=()=>{
                     :<Text text={`R$ ${favorito.preco}`} type={"p"} style={{margin:0, padding:0, display:"block",fontSize:"24px",color:"#FF6900"}}/>}
                     </Grid>
                     <Grid item xs={6} md={3}  sx={{textAlignLast: "center",alignSelf: "center"}}><Btn title={"Ver favorito"} onClick={()=>goToPage(favorito.id)} style={{backgroundColor:corPrincipal}}/></Grid>
-                    <Btn title={<DeleteIcon/>} variant={"text"} size={"large"} onClick={()=>deletaItem(favorito.id) } style={{position:"absolute",margin:0,right:"0px",top:"0px"}}/>
+                    <Btn title={<DeleteIcon/>} variant={"text"} size={"large"} onClick={()=>{deletaItem(favorito.id)} } style={{position:"absolute",margin:0,right:"0px",top:"0px"}}/>
                 </Grid>
             ))}
         </Grid>

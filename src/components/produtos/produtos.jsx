@@ -9,7 +9,7 @@ import NoProductsType from '../noproducts/noProductsType';
 
 
 
-const Produtos=({spacing,produtos,xs,sm,md,lg,xl,xxl})=>{
+const Produtos=({spacing,produtos,xs,sm,md,lg,xl,xxl,somaFav,subtraiFav,somaCart})=>{
     let contador=0;
     const [type,setType]=useState(null)
     
@@ -31,18 +31,18 @@ const Produtos=({spacing,produtos,xs,sm,md,lg,xl,xxl})=>{
                 if(produto.type===type){
                     contador+=1;
                     return( <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
-                                <Produto produto={produto}/>
+                                <Produto produto={produto} somaFav={somaFav} subtraiFav={subtraiFav} somaCart={somaCart}/>
                             </Grid>)
                 }
                 
         }):"Não Há Produtos"}
         {contador===0?<NoProductsType set={setType}/>:""}  {/* Se o contador for zero, nenhum produto da lista era do tipo*/}
     </Grid>:                   
-    <Grid container spacing={spacing} style={{marginTop: "10px"}} onClick={()=>{console.log("oie")}}>   {/* Caso queira carregar todos os produtos irá entrar nesse loop*/}
+    <Grid container spacing={spacing} style={{marginTop: "10px"}}>   {/* Caso queira carregar todos os produtos irá entrar nesse loop*/}
         {produtos.length>0?
             produtos.map(produto=>{
                     return( <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
-                                <Produto produto={produto}/>
+                                <Produto produto={produto} somaFav={somaFav} subtraiFav={subtraiFav} somaCart={somaCart}/>
                             </Grid>)
                 
                 
